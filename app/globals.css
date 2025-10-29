@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Basic global resets and defaults */
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900 antialiased;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  line-height: 1.4;
+}
+
+/* Simple utility styles for common elements */
+a { @apply text-blue-600 hover:underline; }
+button { @apply cursor-pointer; }
+
+/* Preformatted blocks (used by AIRecommendations) */
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}
+
+/* Form inputs consistent look */
+input, textarea, select {
+  @apply border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-200 rounded;
+}
+
+/* Small helper classes (optional) */
+.container {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
