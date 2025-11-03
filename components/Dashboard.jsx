@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../lib/auth-context";
 import { supabase } from "../lib/supabase";
 import MonthlyView from "./MonthlyView";
+import AIRecommendations from "./AIRecommendations"; 
 import YearlySummary from "./YearlySummary";
 import GoalsList from "./GoalsList";
 import GoalInput from "./GoalInput";
@@ -137,6 +138,16 @@ export default function Dashboard() {
       />
 
       <GoalsList goals={goals} showProgress />
+<AIRecommendations
+  userId={user?.id} 
+  month={view === "yearly" ? null : view} 
+  incomes={yearlyData?.incomes || []}
+  expenses={yearlyData?.expenses || []}
+  plan={{ savings_rate: "10%" }}
+  goals={goals}
+/>
+
+
     </div>
   );
 }
