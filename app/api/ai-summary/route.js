@@ -21,9 +21,10 @@ export async function GET(req) {
       );
     }
 
+    // ✅ Fetch from Supabase
     const { data, error } = await supabase
       .from("ai_summaries")
-      .select("summary")
+      .select("summary, last_updated, last_data_change")
       .eq("user_id", userId)
       .eq("month", month)
       .maybeSingle();
@@ -38,8 +39,14 @@ export async function GET(req) {
       return NextResponse.json({ summary: null });
     }
 
-    console.log("✅ Summary retrieved successfully:", data.summary);
-    return NextResponse.json({ summary: data.summary });
+    console.log("✅ Summary retrieved successfully");
+
+    // ✅ Return all timestamps too (for freshness detection)
+    return NextResponse.json({
+      summary: data.summary,
+      last_updated: data.last_updated,
+      last_data_change: data.last_data_change,
+    });
   } catch (err) {
     console.error("💥 Unexpected error in GET /api/ai-summary:", err);
     return NextResponse.json({ error: err.message }, { status: 500 });
